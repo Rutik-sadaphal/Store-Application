@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59cd68a6c87744f0bdf5e0395583af29" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Address" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.CartItem" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Cart" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Category" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Inventory" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.OrderItem" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Order" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Payment" Width="1.5" PointX="8.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.ProductImage" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Product" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Role" Width="1.5" PointX="1.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.Shipment" Width="1.5" PointX="8.25" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingAppDBModel.User" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Addresses_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Orders_Addresses" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_CartItems_Carts" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_CartItems_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Carts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Inventory_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_OrderItems_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_OrderItems_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Payments_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_Shipments_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.FK_ProductImages_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingAppDBModel.UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
