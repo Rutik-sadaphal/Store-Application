@@ -11,11 +11,11 @@ namespace StoreApplicationn.Repositories
 
         Task<ProductResponseDto> GetProductById(int id);
 
-        Task<int> AddProduct(ProductCreateDto product);
+       // Task<int> AddProduct(ProductCreateDto product);
 
-        Task<bool> UpdateProduct(int id, ProductUpdateDto product);
+      //  Task<bool> UpdateProduct(int id, ProductUpdateDto product);
 
-        Task<bool> DeleteProduct(int id);
+       // Task<bool> DeleteProduct(int id);
 
         Task<ProductPagedResponseDto> SearchProducts(
     string searchText,

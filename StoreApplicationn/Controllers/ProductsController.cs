@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using StoreApplicationn.DTOs;
@@ -22,89 +23,33 @@ namespace StoreApplicationn.Controllers
             );
         }
 
-        // GET: api/getProducts
+     
         [HttpGet]
         [Route("api/getProducts")]
         public async Task<IHttpActionResult> GetProducts()
         {
             var products = await productRepository.GetProducts();
 
-            return Ok(products);
+            return Ok(products); 
         }
 
-        // GET: api/getProduct/{id}
+       
         [HttpGet]
         [Route("api/getProduct/{id}")]
         public async Task<IHttpActionResult> GetProduct(int id)
         {
+            if (id <= 0)
+                return BadRequest("Product ID must be greater than zero.");
+
             var product = await productRepository.GetProductById(id);
 
             if (product == null)
-            {
-                return NotFound();
-            }
+                return NotFound(); 
 
             return Ok(product);
         }
 
-        // POST: api/addProduct
-        [HttpPost]
-        [Route("api/addProduct")]
-        public async Task<IHttpActionResult> AddProduct(ProductCreateDto product)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            int productId = await productRepository.AddProduct(product);
-
-            return Ok(new
-            {
-                Message = "Product added successfully",
-                ProductId = productId
-            });
-        }
-
-        // PUT: api/updateProduct/{id}
-        [HttpPut]
-        [Route("api/updateProduct/{id}")]
-        public async Task<IHttpActionResult> UpdateProduct(
-            int id, ProductUpdateDto product)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            bool isUpdated =
-                await productRepository.UpdateProduct(id, product);
-
-            if (!isUpdated)
-            {
-                return NotFound();
-            }
-
-            return Ok("Product updated successfully.");
-        }
-
-        // DELETE: api/deleteProduct/{id}
-        [HttpDelete]
-        [Route("api/deleteProduct/{id}")]
-        public async Task<IHttpActionResult> DeleteProduct(int id)
-        {
-            bool isDeleted =
-                await productRepository.DeleteProduct(id);
-
-            if (!isDeleted)
-            {
-                return NotFound();
-            }
-
-            return Ok("Product deleted successfully.");
-        }
-
-        // GET: api/searchProducts
+        
         [HttpGet]
         [Route("api/searchProducts")]
         public async Task<IHttpActionResult> SearchProducts(
@@ -123,6 +68,15 @@ namespace StoreApplicationn.Controllers
                     "PageNumber must be at least 1 and PageSize must be between 1 and 100.");
             }
 
+            if (minPrice < 0 || maxPrice < 0)
+                return BadRequest("Price cannot be negative.");
+
+            if (minPrice.HasValue && maxPrice.HasValue &&
+                minPrice.Value > maxPrice.Value)
+            {
+                return BadRequest("Minimum price cannot be greater than maximum price.");
+            }
+
             var products = await productRepository.SearchProducts(
                 searchText,
                 categoryId,
@@ -133,10 +87,10 @@ namespace StoreApplicationn.Controllers
                 pageNumber,
                 pageSize);
 
-            return Ok(products);
+            return Ok(products); 
         }
 
-        // POST: api/syncProductImages
+     
         [HttpPost]
         [Route("api/syncProductImages")]
         public async Task<IHttpActionResult> SyncProductImages()
@@ -149,11 +103,12 @@ namespace StoreApplicationn.Controllers
                 {
                     Message = "Image synchronization completed successfully.",
                     InsertedCount = count
-                });
+                }); 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return InternalServerError(ex);
+               
+                return InternalServerError(); 
             }
         }
     }

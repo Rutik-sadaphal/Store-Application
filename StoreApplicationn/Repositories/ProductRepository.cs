@@ -75,69 +75,69 @@ namespace StoreApplicationn.Repositories
         }
 
        
-        public async Task<int> AddProduct(ProductCreateDto product)
-        {
-            var newProduct = new Product
-            {
-                ProductName = product.ProductName,
-                CategoryId = product.CategoryId,
-                SKU = product.SKU,
-                Description = product.Description,
-                ProductType = product.ProductType,
-                Price = product.Price,
-                IsActive = product.IsActive
-            };
+        //public async Task<int> AddProduct(ProductCreateDto product)
+        //{
+        //    var newProduct = new Product
+        //    {
+        //        ProductName = product.ProductName,
+        //        CategoryId = product.CategoryId,
+        //        SKU = product.SKU,
+        //        Description = product.Description,
+        //        ProductType = product.ProductType,
+        //        Price = product.Price,
+        //        IsActive = product.IsActive
+        //    };
 
-            db.Products.Add(newProduct);
+        //    db.Products.Add(newProduct);
 
-            await db.SaveChangesAsync();
+        //    await db.SaveChangesAsync();
 
-            return newProduct.ProductId;
-        }
-
-       
-        public async Task<bool> UpdateProduct(
-            int id,
-            ProductUpdateDto product)
-        {
-            var existingProduct = await db.Products
-                .FirstOrDefaultAsync(p => p.ProductId == id);
-
-            if (existingProduct == null)
-            {
-                return false;
-            }
-
-            existingProduct.ProductName = product.ProductName;
-            existingProduct.CategoryId = product.CategoryId;
-            existingProduct.SKU = product.SKU;
-            existingProduct.Description = product.Description;
-            existingProduct.ProductType = product.ProductType;
-            existingProduct.Price = product.Price;
-            existingProduct.IsActive = product.IsActive;
-
-            await db.SaveChangesAsync();
-
-            return true;
-        }
+        //    return newProduct.ProductId;
+        //}
 
        
-        public async Task<bool> DeleteProduct(int id)
-        {
-            var product = await db.Products
-                .FirstOrDefaultAsync(p => p.ProductId == id);
+        //public async Task<bool> UpdateProduct(
+        //    int id,
+        //    ProductUpdateDto product)
+        //{
+        //    var existingProduct = await db.Products
+        //        .FirstOrDefaultAsync(p => p.ProductId == id);
 
-            if (product == null)
-            {
-                return false;
-            }
+        //    if (existingProduct == null)
+        //    {
+        //        return false;
+        //    }
 
-            db.Products.Remove(product);
+        //    existingProduct.ProductName = product.ProductName;
+        //    existingProduct.CategoryId = product.CategoryId;
+        //    existingProduct.SKU = product.SKU;
+        //    existingProduct.Description = product.Description;
+        //    existingProduct.ProductType = product.ProductType;
+        //    existingProduct.Price = product.Price;
+        //    existingProduct.IsActive = product.IsActive;
 
-            await db.SaveChangesAsync();
+        //    await db.SaveChangesAsync();
 
-            return true;
-        }
+        //    return true;
+        //}
+
+       
+        //public async Task<bool> DeleteProduct(int id)
+        //{
+        //    var product = await db.Products
+        //        .FirstOrDefaultAsync(p => p.ProductId == id);
+
+        //    if (product == null)
+        //    {
+        //        return false;
+        //    }
+
+        //    db.Products.Remove(product);
+
+        //    await db.SaveChangesAsync();
+
+        //    return true;
+        //}
 
        
 
