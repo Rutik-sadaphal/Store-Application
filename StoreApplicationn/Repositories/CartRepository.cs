@@ -75,7 +75,7 @@ namespace StoreApplicationn.Repositories
             await db.SaveChangesAsync();
         }
 
-      
+
         public async Task<CartResponseDto> GetCartResponse(int userId)
         {
             var cart = await db.Carts
@@ -87,8 +87,13 @@ namespace StoreApplicationn.Repositories
 
             return MapCart(cart);
         }
+        public async Task<bool> CartHasItems(int userId)
+        {
+            return await db.CartItems.AnyAsync(item =>
+                item.Cart.UserId == userId);
+        }
 
-       
+
         private CartResponseDto MapCart(Cart cart)
         {
             var response = new CartResponseDto

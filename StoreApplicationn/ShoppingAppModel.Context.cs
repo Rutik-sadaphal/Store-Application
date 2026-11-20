@@ -38,5 +38,6 @@ namespace StoreApplicationn
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Shipment> Shipments { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<OrderAddressSnapshot> OrderAddressSnapshots { get; set; }
     }
 }

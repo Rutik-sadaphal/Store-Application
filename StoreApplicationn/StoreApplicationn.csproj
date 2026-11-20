@@ -175,6 +175,7 @@
       <DependentUpon>ShoppingAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CartsController.cs" />
+    <Compile Include="Controllers\CheckoutsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="DTOs\CartItemResponseDto.cs" />
     <Compile Include="DTOs\CartItemUpdateDto.cs" />
     <Compile Include="DTOs\CartResponseDto.cs" />
+    <Compile Include="DTOs\CheckoutRequestDto.cs" />
     <Compile Include="DTOs\ProductCreateDto.cs" />
     <Compile Include="DTOs\ProductImageDto.cs" />
     <Compile Include="DTOs\ProductPagedResponseDto.cs" />
@@ -200,6 +202,9 @@
     <Compile Include="Order.cs">
       <DependentUpon>ShoppingAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderAddressSnapshot.cs">
+      <DependentUpon>ShoppingAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrderItem.cs">
       <DependentUpon>ShoppingAppModel.tt</DependentUpon>
     </Compile>
@@ -213,7 +218,9 @@
       <DependentUpon>ShoppingAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\CartRepository.cs" />
+    <Compile Include="Repositories\IAddressRepository.cs" />
     <Compile Include="Repositories\ICartRepository.cs" />
     <Compile Include="Repositories\IProductImageRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
@@ -226,7 +233,9 @@
     </Compile>
     <Compile Include="Services\CartCalculationService.cs" />
     <Compile Include="Services\CartService.cs" />
+    <Compile Include="Services\CheckoutService.cs" />
     <Compile Include="Services\ICartService.cs" />
+    <Compile Include="Services\ICheckoutServices.cs" />
     <Compile Include="Services\IProductImageSyncService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ProductImageSyncService.cs" />
@@ -353,6 +362,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Carts\" />
+    <Folder Include="Views\Checkouts\" />
+    <Folder Include="Views\Checkout\" />
     <Folder Include="Views\Products\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

@@ -56,6 +56,19 @@
           <Property Name="ReorderLevel" Type="int" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="OrderAddressSnapshots">
+          <Key>
+            <PropertyRef Name="SnapshotId" />
+          </Key>
+          <Property Name="SnapshotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="AddressType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AddressLine" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="OrderItems">
           <Key>
             <PropertyRef Name="OrderItemId" />
@@ -113,6 +126,8 @@
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="100" />
+          <Property Name="StockQuantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -210,6 +225,18 @@
             </Principal>
             <Dependent Role="Inventory">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAddressSnapshots_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderAddressSnapshots" Type="Self.OrderAddressSnapshots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderAddressSnapshots">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -339,6 +366,7 @@
           <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderAddressSnapshots" EntityType="Self.OrderAddressSnapshots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
@@ -367,6 +395,10 @@
           <AssociationSet Name="FK_Inventory_Products" Association="Self.FK_Inventory_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAddressSnapshots_Orders" Association="Self.FK_OrderAddressSnapshots_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderAddressSnapshots" EntitySet="OrderAddressSnapshots" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItems_Orders" Association="Self.FK_OrderItems_Orders">
             <End Role="Orders" EntitySet="Orders" />
@@ -499,6 +531,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_Orders" FromRole="Orders" ToRole="Payments" />
           <NavigationProperty Name="Shipments" Relationship="Self.FK_Shipments_Orders" FromRole="Orders" ToRole="Shipments" />
+          <NavigationProperty Name="OrderAddressSnapshots" Relationship="ShoppingAppDBModel.FK_OrderAddressSnapshots_Orders" FromRole="Order" ToRole="OrderAddressSnapshot" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -543,6 +576,8 @@
           <NavigationProperty Name="Inventories" Relationship="Self.FK_Inventory_Products" FromRole="Products" ToRole="Inventory" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItems_Products" FromRole="Products" ToRole="OrderItems" />
           <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImages_Products" FromRole="Products" ToRole="ProductImages" />
+          <Property Name="Brand" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StockQuantity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -811,7 +846,38 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="OrderAddressSnapshots" EntityType="ShoppingAppDBModel.OrderAddressSnapshot" />
+          <AssociationSet Name="FK_OrderAddressSnapshots_Orders" Association="ShoppingAppDBModel.FK_OrderAddressSnapshots_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderAddressSnapshot" EntitySet="OrderAddressSnapshots" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OrderAddressSnapshot">
+          <Key>
+            <PropertyRef Name="SnapshotId" />
+          </Key>
+          <Property Name="SnapshotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="AddressType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order" Relationship="ShoppingAppDBModel.FK_OrderAddressSnapshots_Orders" FromRole="OrderAddressSnapshot" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_OrderAddressSnapshots_Orders">
+          <End Type="ShoppingAppDBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="ShoppingAppDBModel.OrderAddressSnapshot" Role="OrderAddressSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderAddressSnapshot">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -925,6 +991,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShoppingAppDBModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -979,6 +1047,20 @@
               <ScalarProperty Name="UserId" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="OrderAddressSnapshots">
+            <EntityTypeMapping TypeName="ShoppingAppDBModel.OrderAddressSnapshot">
+              <MappingFragment StoreEntitySet="OrderAddressSnapshots">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

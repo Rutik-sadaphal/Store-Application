@@ -32,6 +32,8 @@ namespace StoreApplicationn
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime CreatedAt { get; set; }
+        public string Brand { get; set; }
+        public int StockQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartItem> CartItems { get; set; }

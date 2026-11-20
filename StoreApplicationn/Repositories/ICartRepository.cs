@@ -26,5 +26,7 @@ namespace StoreApplicationn.Repositories
         Task SaveChanges();
 
         Task<CartResponseDto> GetCartResponse(int userId);
+
+        Task<bool> CartHasItems(int userId);
     }
 }

@@ -20,6 +20,7 @@ namespace StoreApplicationn
             this.OrderItems = new HashSet<OrderItem>();
             this.Payments = new HashSet<Payment>();
             this.Shipments = new HashSet<Shipment>();
+            this.OrderAddressSnapshots = new HashSet<OrderAddressSnapshot>();
         }
     
         public int OrderId { get; set; }
@@ -37,5 +38,7 @@ namespace StoreApplicationn
         public virtual ICollection<Payment> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Shipment> Shipments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderAddressSnapshot> OrderAddressSnapshots { get; set; }
     }
 }
