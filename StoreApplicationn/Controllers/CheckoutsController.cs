@@ -6,45 +6,35 @@ using System.Web.Http;
 namespace StoreApplicationn.Controllers
 {
     [RoutePrefix("api/checkouts")]
-        public class CheckoutsController : ApiController
+    public class CheckoutsController : ApiController
+    {
+        private readonly ICheckoutServices checkoutService;
+
+        public CheckoutsController()
         {
-            private readonly CheckoutService checkoutService;
+            checkoutService = new CheckoutService();
+        }
 
-            public CheckoutsController()
-            {
-                checkoutService = new CheckoutService();
-            }
-
-            [HttpPost]
-            [Route("validate")]
-            public async Task<IHttpActionResult> ValidateCheckout(
+        [HttpPost]
+        [Route("validate")]
+        public async Task<IHttpActionResult> ValidateCheckout(
             [FromBody] CheckoutRequestDto request)
-            {
-                if (request == null)
-                {
-                    return BadRequest("Checkout Request is Required.");
-                }
+        {
+            if (request == null)
+                return BadRequest("Checkout request is required.");
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                string result = await checkoutService.ValidateCheckout(request.UserId,
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            CheckoutResponseDto result = await checkoutService.ValidateCheckout(
+                request.UserId,
                 request.BillingAddressId,
                 request.ShippingAddressId);
 
-                if (result != null)
-                {
-                    return BadRequest(result);
-                }
+            if (!result.Success)
+                return BadRequest(result.Message);
 
-                return Ok(new
-                {
-                    Message = "Checkout validation successful."
-                });
-
-            }
-
+            return Ok(result);
         }
-    
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreApplicationn.DTOs;
 
 namespace StoreApplicationn.Services
 {
@@ -17,9 +18,9 @@ namespace StoreApplicationn.Services
 
         Task<string> ValidateProducts(int userId);
 
-        Task<string> ValidateCheckout(
+        Task<CheckoutResponseDto> ValidateCheckout(
             int userId,
             int billingAddressId,
-            int shippingAddressId);
+            int shippingAddressId); 
     }
 }

@@ -118,5 +118,15 @@ namespace StoreApplicationn.Repositories
 
             return response;
         }
+        public async Task ClearCart(int userId)
+        {
+            var cartItems = await db.CartItems
+                .Where(item => item.Cart.UserId == userId)
+                .ToListAsync();
+
+            db.CartItems.RemoveRange(cartItems);
+
+            await db.SaveChangesAsync();
+        }
     }
 }

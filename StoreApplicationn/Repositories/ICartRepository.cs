@@ -28,5 +28,7 @@ namespace StoreApplicationn.Repositories
         Task<CartResponseDto> GetCartResponse(int userId);
 
         Task<bool> CartHasItems(int userId);
+
+        Task ClearCart(int userId);
     }
 }

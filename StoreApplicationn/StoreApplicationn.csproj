@@ -174,16 +174,30 @@
     <Compile Include="Category.cs">
       <DependentUpon>ShoppingAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AddressesApiController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CheckoutsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersApiController.cs" />
+    <Compile Include="Controllers\PaymentsApiController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DTOs\AddressCreateDto.cs" />
+    <Compile Include="DTOs\AddressResponseDto.cs" />
     <Compile Include="DTOs\CartItemCreateDto.cs" />
     <Compile Include="DTOs\CartItemResponseDto.cs" />
     <Compile Include="DTOs\CartItemUpdateDto.cs" />
     <Compile Include="DTOs\CartResponseDto.cs" />
     <Compile Include="DTOs\CheckoutRequestDto.cs" />
+    <Compile Include="DTOs\CheckoutResponseDto.cs" />
+    <Compile Include="DTOs\OrderAddressDetailsDto.cs" />
+    <Compile Include="DTOs\OrderCreateDto.cs" />
+    <Compile Include="DTOs\OrderDetailsDto.cs" />
+    <Compile Include="DTOs\OrderItemDetailsDto.cs" />
+    <Compile Include="DTOs\OrderResponseDto.cs" />
+    <Compile Include="DTOs\PaymentDetailsDto.cs" />
+    <Compile Include="DTOs\PaymentRequestDto.cs" />
+    <Compile Include="DTOs\PaymentResponseDto.cs" />
     <Compile Include="DTOs\ProductCreateDto.cs" />
     <Compile Include="DTOs\ProductImageDto.cs" />
     <Compile Include="DTOs\ProductPagedResponseDto.cs" />
@@ -222,22 +236,32 @@
     <Compile Include="Repositories\CartRepository.cs" />
     <Compile Include="Repositories\IAddressRepository.cs" />
     <Compile Include="Repositories\ICartRepository.cs" />
+    <Compile Include="Repositories\IOrderRepository.cs" />
+    <Compile Include="Repositories\IPaymentRepository.cs" />
     <Compile Include="Repositories\IProductImageRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\ProductImageRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Role.cs">
       <DependentUpon>ShoppingAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\CartCalculationService.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\CheckoutService.cs" />
+    <Compile Include="Services\IAddressService.cs" />
     <Compile Include="Services\ICartService.cs" />
     <Compile Include="Services\ICheckoutServices.cs" />
+    <Compile Include="Services\IOrderService.cs" />
+    <Compile Include="Services\IPaymentService.cs" />
     <Compile Include="Services\IProductImageSyncService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\PaymentService.cs" />
     <Compile Include="Services\ProductImageSyncService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Shipment.cs">
@@ -361,9 +385,13 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AddressesApi\" />
     <Folder Include="Views\Carts\" />
     <Folder Include="Views\Checkouts\" />
     <Folder Include="Views\Checkout\" />
+    <Folder Include="Views\OrdersApi\" />
+    <Folder Include="Views\Orders\" />
+    <Folder Include="Views\PaymentsApi\" />
     <Folder Include="Views\Products\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>
